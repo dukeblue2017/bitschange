@@ -10,6 +10,7 @@ class App extends Component {
     this.state = {
       isLoggedIn: false,
     };
+
     this.handleLogin = this.handleLogin.bind(this);
   }
 
@@ -20,7 +21,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.isLoggedIn ? <MainPage /> : <LoginPage handleLogin={this.handleLogin} /> }
+        {this.state.isLoggedIn ? <MainPage /> : <LoginPage handleLogin={this.handleLogin} />}
       </div>
     );
   }
