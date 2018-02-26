@@ -12,7 +12,7 @@ class PriceContainer extends Component {
     if (this.props.prices) {
       const keyArr = Object.keys(this.props.prices);
       const priceArr = keyArr.map(item => (
-        <div className="price-entry">
+        <div className="price-entry" key={`${item}-price`}>
           {`${item}: ${this.props.prices[item].price} ${this.props.prices[item].denominator}`}
         </div>
       ));
