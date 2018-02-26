@@ -48,42 +48,47 @@ class Balances extends Component {
 
   componentDidUpdate(prevProps) {
     if (JSON.stringify(prevProps.balances) !== JSON.stringify(this.props.balances)) {
-      this.setState(
-        {
-          totalValue: this.state.balanceObj.USD.usdValue + this.state.balanceObj.BTC.usdValue + this.state.balanceObj.LTC.usdValue + this.state.balanceObj.DOGE.usdValue + this.state.balanceObj.XMR.usdValue,
-          balanceObj: {
-            USD: {
-              balance: this.props.balances.USD,
-              usdValue: this.props.balances.USD,
-              price: 1,
-              denominator: 'USD',
-            },
-            BTC: {
-              balance: this.props.balances.BTC,
-              usdValue: this.props.balances.BTC * this.props.prices.BTC.price,
-              price: this.props.prices.BTC.price,
-              denominator: 'USD',
-            },
-            LTC: {
-              balance: this.props.balances.LTC,
-              usdValue: this.props.balances.LTC * this.props.prices.LTC.price * this.props.prices.BTC.price,
-              price: this.props.prices.LTC.price,
-              denominator: 'BTC',
-            },
-            DOGE: {
-              balance: this.props.balances.DOGE,
-              usdValue: this.props.balances.DOGE * this.props.prices.DOGE.price * this.props.prices.BTC.price,
-              price: this.props.prices.DOGE.price,
-              denominator: 'BTC',
-            },
-            XMR: {
-              balance: this.props.balances.XMR,
-              usdValue: this.props.balances.XMR * this.props.prices.XMR.price * this.props.prices.BTC.price,
-              price: this.props.prices.XMR.price,
-              denominator: 'BTC',
-            },
+      const newObj = {
+        totalValue: this.state.balanceObj.USD.usdValue + this.state.balanceObj.BTC.usdValue + this.state.balanceObj.LTC.usdValue + this.state.balanceObj.DOGE.usdValue + this.state.balanceObj.XMR.usdValue,
+        balanceObj: {
+          USD: {
+            balance: this.props.balances.USD,
+            usdValue: this.props.balances.USD,
+            price: 1,
+            denominator: 'USD',
           },
-        });
+          BTC: {
+            balance: this.props.balances.BTC,
+            usdValue: this.props.balances.BTC * this.props.prices.BTC.price,
+            price: this.props.prices.BTC.price,
+            denominator: 'USD',
+          },
+          LTC: {
+            balance: this.props.balances.LTC,
+            usdValue: this.props.balances.LTC * this.props.prices.LTC.price * this.props.prices.BTC.price,
+            price: this.props.prices.LTC.price,
+            denominator: 'BTC',
+          },
+          DOGE: {
+            balance: this.props.balances.DOGE,
+            usdValue: this.props.balances.DOGE * this.props.prices.DOGE.price * this.props.prices.BTC.price,
+            price: this.props.prices.DOGE.price,
+            denominator: 'BTC',
+          },
+          XMR: {
+            balance: this.props.balances.XMR,
+            usdValue: this.props.balances.XMR * this.props.prices.XMR.price * this.props.prices.BTC.price,
+            price: this.props.prices.XMR.price,
+            denominator: 'BTC',
+          },
+        },
+      };
+      const totalValue = newObj.balanceObj.USD.usdValue + newObj.balanceObj.BTC.usdValue + newObj.balanceObj.LTC.usdValue + newObj.balanceObj.DOGE.usdValue + newObj.balanceObj.XMR.usdValue;
+      for (let i = 0; i < Object.keys(newObj.balanceObj).length; i += 1) {
+        const item = Object.keys(newObj.balanceObj)[i];
+        newObj.balanceObj[item].percentageOfPortfolio = newObj.balanceObj[item].usdValue / totalValue;
+      }
+      this.setState(newObj)
     }
   }
 
