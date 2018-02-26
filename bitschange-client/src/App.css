@@ -1,13 +1,17 @@
 .App {
   height: 100vh;
+  font-family: 'Mukta Vaani', sans-serif;
+  background-color: linen
 }
 
 .navbar {
-  background-color: darkblue;
-  color: white;
-  height: 40px;
-  font-size: 2em;
+  background-color: navy;
+  color: ivory;
+  font-size: 3em;
   text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: .2em 0em;
 }
 
 .login-page {
@@ -26,7 +30,7 @@
 
 form {
   font-size: 1.3em;
-  color: darkblue;
+  color: navy;
   text-align: center;
 }
 
@@ -39,4 +43,20 @@ label > input {
   margin-top: 1em;
   padding: .6em;
   width: 100%;
+}
+
+.price-container {
+  background-color: linen;
+  display: flex;
+  justify-content: space-between;
+  padding: 0em 10em;
+  margin: auto;
+  border-bottom: 1px solid black;
+}
+
+.price-entry {
+  margin: .4em 0em;
+  padding: .7em;
+  border: 1px solid navy;
+  border-radius: 3em;
 }

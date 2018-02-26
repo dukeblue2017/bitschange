@@ -9,6 +9,30 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv').config({ // eslint-disable-line
   path: 'env.env',
 });
+const axios = require('axios');
+
+const currentPrices = {
+  BTC: { price: null, denominator: 'USD' },
+  LTC: { price: null, denominator: 'BTC' },
+  DOGE: { price: null, denominator: 'BTC' },
+  XMR: { price: null, denominator: 'BTC' },
+};
+
+const fetchCurrentPrices = () => {
+  const pairs = [
+    { coin: 'BTC', in: 'USD' },
+    { coin: 'LTC', in: 'BTC' },
+    { coin: 'DOGE', in: 'BTC' },
+    { coin: 'XMR', in: 'BTC' },
+  ];
+  for (let i = 0; i < pairs.length; i += 1) {
+    axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${pairs[i].coin}&tsyms=${pairs[i].in}`)
+      .then((res) => { currentPrices[pairs[i].coin].price = res.data[pairs[i].in]; })
+      .catch(err => console.log(err));
+  }
+};
+
+fetchCurrentPrices();
 
 const port = 5000;
 const app = express();
@@ -66,10 +90,6 @@ app.use((req, res, next) => {
   }
 });
 
-app.get('/test', (req, res) => {
-  console.log('req.headers.authorization:', req.headers.authorization);
-  res.end();
-});
 
 app.get('/balances', (req, res) => {
   const token = req.headers.authorization;
@@ -83,4 +103,9 @@ app.get('/balances', (req, res) => {
         .catch(dbErr => res.send(dbErr));
     }
   });
+});
+
+app.get('/prices', (req, res) => {
+  fetchCurrentPrices()
+  res.send(currentPrices);
 });

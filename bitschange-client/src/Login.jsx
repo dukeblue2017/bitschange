@@ -38,7 +38,7 @@ class LoginPage extends Component {
       .then( (res) => {
         if (res.data.token) {
           axios.defaults.headers.common.Authorization = res.data.token;
-          alert('Correct! You have logged in');
+          // alert('Correct! You have logged in');
           this.props.handleLogin();
         } else {
           alert('Incorrect login credentials. Please try again.');
