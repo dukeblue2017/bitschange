@@ -42,14 +42,15 @@ class BalanceContainer extends Component {
     const XMRUSD = this.props.balances.XMRBalance * this.props.prices.XMR.price * this.props.prices.BTC.price;
     const totalCryptoValue = BTCUSD + DOGEUSD + LTCUSD + XMRUSD;
     const totalValue = totalCryptoValue + this.props.balances.USDBalance;
-    this.setState({ totalValue, totalCryptoValue })
+    this.setState({ totalValue, totalCryptoValue });
   }
 
   render() {
     return (
       <div className="balance-container">
         {this.state.balanceArr && this.state.balanceArr}
-        {this.state.totalValue && <div className="total-value">
+        {this.state.totalValue &&
+        <div className="total-value">
           Combined Value of All: {this.state.totalValue} USD
         </div>}
       </div>

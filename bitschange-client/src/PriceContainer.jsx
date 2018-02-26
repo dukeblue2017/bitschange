@@ -31,9 +31,11 @@ class PriceContainer extends Component {
 
   render() {
     return (
-      <div className="price-container">
-        {this.state.priceArr && this.state.priceArr}
-      </div>
+      <a href="https://www.cryptocompare.com/">
+        <div className="price-container">
+          {this.state.priceArr && this.state.priceArr}
+        </div>
+      </a>
     );
   }
 }
