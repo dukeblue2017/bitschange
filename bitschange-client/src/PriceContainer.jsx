@@ -8,7 +8,15 @@ class PriceContainer extends Component {
     };
   }
 
+  componentDidMount() {
+    this.buildPriceArr();
+  }
+
   componentWillReceiveProps() {
+    this.buildPriceArr();
+  }
+
+  buildPriceArr() {
     if (this.props.prices) {
       const keyArr = Object.keys(this.props.prices);
       const priceArr = keyArr.map(item => (
@@ -19,6 +27,7 @@ class PriceContainer extends Component {
       this.setState({ priceArr });
     }
   }
+
 
   render() {
     return (

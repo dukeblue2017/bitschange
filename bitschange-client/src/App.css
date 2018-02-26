@@ -46,11 +46,9 @@ label > input {
 }
 
 .price-container {
-  background-color: linen;
+  background-color: silver;
   display: flex;
   justify-content: space-between;
-  /*padding: 0% 15%;*/
-  max-width: 800px;
   margin: auto;
   border-bottom: 1px solid black;
 }
@@ -61,4 +59,25 @@ label > input {
   padding: .7em;
   border: 1px solid navy;
   border-radius: 3em;
+  background-color: whitesmoke;
+}
+
+.balance-container {
+  max-width: 300px;
+}
+
+.balance-entry {
+  display: flex;
+  margin-left: 1em;
+  border-left: .5em solid teal;
+  margin: 1em 1em;
+  background-color: gainsboro;
+}
+
+.balance-entry > div {
+  margin-left: 1em;
+}
+
+.balance-entry-right {
+  float: right;
 }

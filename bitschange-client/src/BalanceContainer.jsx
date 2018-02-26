@@ -8,15 +8,26 @@ class BalanceContainer extends Component {
     };
   }
 
+
+  componentDidMount() {
+    this.buildArr();
+  }
+
   componentWillReceiveProps() {
+    this.buildArr();
+  }
+
+  buildArr() {
     if (this.props.balances) {
-      // const keyArr = Object.keys(this.props.prices);
-      // const priceArr = keyArr.map(item => (
-      //   <div className="price-entry">
-      //     {`${item}: ${this.props.prices[item].price} ${this.props.prices[item].denominator}`}
-      //   </div>
-      // ));
-      // this.setState({ priceArr });
+      console.log(this.props.balances);
+      const keyArr = Object.keys(this.props.balances);
+      const balanceArr = keyArr.map(item => (
+        <div className="balance-entry" key={item}>
+          <div>{item}</div>
+          <div className="balance-entry-right">{this.props.balances[item]}</div>
+        </div>
+      ));
+      this.setState({ balanceArr });
     }
   }
 

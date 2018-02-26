@@ -95,8 +95,8 @@ app.get('/balances', (req, res) => {
     } else {
       const username = decode;
       db.fetchBalances(username)
-        .then(dbRes => res.send(dbRes))
-        .catch(dbErr => res.send(dbErr));
+        .then((dbRes) => { res.send(dbRes); })
+        .catch((dbErr) => { res.send(dbErr); });
     }
   });
 });
