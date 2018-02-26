@@ -88,7 +88,7 @@ class Balances extends Component {
         const item = Object.keys(newObj.balanceObj)[i];
         newObj.balanceObj[item].percentageOfPortfolio = newObj.balanceObj[item].usdValue / totalValue;
       }
-      this.setState(newObj)
+      this.setState(newObj);
     }
   }
 
@@ -99,7 +99,7 @@ class Balances extends Component {
         {Object.keys(this.state.balanceObj).map(item => (
           <div className="balance-entry" key={item}>
             <div className="which-coin">{item}</div>
-            <div className="quantity">{this.state.balanceObj[item].balance.toFixed(5)}</div>
+            <div className="quantity">{item === 'USD' ? this.state.balanceObj[item].balance.toFixed(2) : this.state.balanceObj[item].balance.toFixed(5)}</div>
             <div className="usd-value">${this.state.balanceObj[item].usdValue.toFixed(2)}</div>
             <div className="percentage">{(this.state.balanceObj[item].percentageOfPortfolio * 100).toFixed(2)}%</div>
           </div>
