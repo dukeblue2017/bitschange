@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PriceContainer from './PriceContainer';
-import BalanceContainer from './BalanceContainer';
+import Balances from './Balances';
 import Buy from './Buy';
 
 class MainPage extends Component {
@@ -46,7 +46,7 @@ class MainPage extends Component {
       <div className="main-page">
         <div className="navbar">Bitschange</div>
         {this.state.prices && <PriceContainer prices={this.state.prices} />}
-        {this.state.balances && <BalanceContainer balances={this.state.balances} prices={this.state.prices} />}
+        {this.state.balances && <Balances balances={this.state.balances} prices={this.state.prices} />}
         <Buy loadNew={this.loadNew} />
       </div>
     );
