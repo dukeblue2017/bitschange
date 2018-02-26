@@ -24,7 +24,6 @@ class Balances extends Component {
     if (this.props.balances) {
       const keyArr = Object.keys(this.props.balances);
       const balanceArr = keyArr.map(item => {
-        console.log(item, this.props.balances[item], this.props.prices[item]);
         return (
           <div className="balance-entry" key={item}>
             <div className="which-coin">{item}</div>
@@ -41,13 +40,14 @@ class Balances extends Component {
   }
 
   calculateTotalValue() {
-    let BTCUSD = this.props.balances.BTC * this.props.prices.BTC.price;
-    let DOGEUSD = this.props.balances.DOGE * this.props.prices.DOGE.price * this.props.prices.BTC.price;
-    let LTCUSD = this.props.balances.LTC * this.props.prices.LTC.price * this.props.prices.BTC.price;
-    let XMRUSD = this.props.balances.XMR * this.props.prices.XMR.price * this.props.prices.BTC.price;
-    let totalCryptoValue = BTCUSD + DOGEUSD + LTCUSD + XMRUSD;
-    let totalValue = totalCryptoValue + this.props.balances.USD;
-    this.setState({ totalValue, totalCryptoValue });
+    const currObj = {};
+    let totalCryptoValue = 0;
+    Object.keys(this.props.prices).forEach((item) => {
+      currObj[item] = this.props.balances[item] * this.props.prices[item].price;
+      totalCryptoValue += currObj[item];
+    });
+    const totalValue = totalCryptoValue + this.props.balances.USD;
+    this.setState({ totalValue });
   }
 
   render() {
@@ -57,7 +57,7 @@ class Balances extends Component {
         {this.state.balanceArr && this.state.balanceArr}
         {this.state.totalValue &&
         <div className="total-value">
-          Combined Value of All: {this.state.totalValue} USD
+          Combined Value of All: {this.state.totalValue.toFixed(2)} USD
         </div>}
       </div>
     );
