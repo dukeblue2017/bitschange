@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm test",
+    "setup": "npm install && cd bitschange-client && npm install",
     "build-client": "cd bitschange-client && npm run build",
     "start-dev": "concurrently \"nodemon server/index.js\" \"cd bitschange-client && npm run start\"",
     "start-production": "npm run build-client && nodemon server/index.js"
