@@ -49,13 +49,15 @@ label > input {
   background-color: linen;
   display: flex;
   justify-content: space-between;
-  padding: 0em 10em;
+  /*padding: 0% 15%;*/
+  max-width: 800px;
   margin: auto;
   border-bottom: 1px solid black;
 }
 
 .price-entry {
-  margin: .4em 0em;
+  text-align: center;
+  margin: .4em .2em;
   padding: .7em;
   border: 1px solid navy;
   border-radius: 3em;

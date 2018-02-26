@@ -48,7 +48,7 @@ app.listen(port, () => {
 
 // this could be used to save the hash in the db
 // bcrypt.hash(req_password, saltRounds).then(hash => db.setHash(req_username,hash)).catch(err => console.log(err));
-// const saltRounds = 10;
+// const saltRounds = process.env.SALT_ROUNDS;
 
 app.post('/login', (req, res) => {
   const reqUsername = req.body.username;
@@ -60,7 +60,7 @@ app.post('/login', (req, res) => {
         const token = jwt.sign(reqUsername, process.env.JWT_SECRET);
         res.json({ token });
       } else {
-        res.end();
+        res.send('Incorrect password');
       }
     })
     .catch(err => res.send(err));
@@ -72,18 +72,14 @@ app.use((req, res, next) => {
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
       if (err) {
-        // console.log('err 1');
         res.status(403).json({
           message: 'Invalid Token',
         });
       } else {
-        req.decoded = decode;
-        // console.log('JWT is good');
         next();
       }
     });
   } else {
-    // console.log('err 2');
     res.status(403).json({
       message: 'No Token Provided',
     });
@@ -106,6 +102,6 @@ app.get('/balances', (req, res) => {
 });
 
 app.get('/prices', (req, res) => {
-  fetchCurrentPrices()
+  fetchCurrentPrices();
   res.send(currentPrices);
 });

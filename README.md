@@ -8,6 +8,7 @@
     + DB_USER
     + DB_PASS
     + DB_DATABASE
+    + SALT_ROUNDS
     + JWT_SECRET
 
 ### Devlopment Instructions
