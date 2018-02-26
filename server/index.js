@@ -102,6 +102,48 @@ app.get('/balances', (req, res) => {
 });
 
 app.get('/prices', (req, res) => {
+  // need to resolve the async issue here
   fetchCurrentPrices();
   res.send(currentPrices);
+});
+
+
+app.post('/buy', (req, res) => {
+  fetchCurrentPrices();
+  const coinToBuy = req.body.coinToBuy;
+  const buyQuantity = req.body.quantity * 1;
+  const price = currentPrices[coinToBuy].price * 1;
+  const denominator = currentPrices[coinToBuy].denominator;
+  const denomQtNeeded = buyQuantity * price;
+  const token = req.headers.authorization;
+  jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
+    if (err) {
+      res.send(err);
+    } else {
+      const username = decode;
+      db.fetchTwoBalances(username, coinToBuy, denominator)
+        .then((dbRes) => {
+          const coinToBuyBalance = dbRes[0][coinToBuy];
+          const denomBalance = dbRes[0][denominator];
+          if (denomBalance >= denomQtNeeded) {
+            console.log(`Attempting to buy ${buyQuantity} ${coinToBuy}`);
+            const newCTBBalance = coinToBuyBalance + buyQuantity;
+            const newDenomBalance = denomBalance - denomQtNeeded;
+            db.processBuy(username, coinToBuy, newCTBBalance, denominator, newDenomBalance)
+              .then((dbBuyRes) => {
+                console.log('dbBuyRes:', dbBuyRes);
+                res.status(200).end();
+              })
+              .catch((dbBuyErr) => {
+                console.log(dbBuyErr);
+                res.status(500).send(dbBuyErr);
+              });
+          } else {
+            console.log('not enough of denom', dbRes);
+            res.send('not enough of denominator');
+          }
+        })
+        .catch((DBerr) => { res.status(500).send(DBerr); });
+    }
+  });
 });

@@ -11,7 +11,6 @@ class BalanceContainer extends Component {
     };
   }
 
-
   componentDidMount() {
     this.buildArr();
     this.calculateTotalValue();
@@ -36,18 +35,19 @@ class BalanceContainer extends Component {
   }
 
   calculateTotalValue() {
-    const BTCUSD = this.props.balances.BTCBalance * this.props.prices.BTC.price;
-    const DOGEUSD = this.props.balances.DOGEBalance * this.props.prices.DOGE.price * this.props.prices.BTC.price;
-    const LTCUSD = this.props.balances.LTCBalance * this.props.prices.LTC.price * this.props.prices.BTC.price;
-    const XMRUSD = this.props.balances.XMRBalance * this.props.prices.XMR.price * this.props.prices.BTC.price;
+    const BTCUSD = this.props.balances.BTC * this.props.prices.BTC.price;
+    const DOGEUSD = this.props.balances.DOGE * this.props.prices.DOGE.price * this.props.prices.BTC.price;
+    const LTCUSD = this.props.balances.LTC * this.props.prices.LTC.price * this.props.prices.BTC.price;
+    const XMRUSD = this.props.balances.XMR * this.props.prices.XMR.price * this.props.prices.BTC.price;
     const totalCryptoValue = BTCUSD + DOGEUSD + LTCUSD + XMRUSD;
-    const totalValue = totalCryptoValue + this.props.balances.USDBalance;
+    const totalValue = totalCryptoValue + this.props.balances.USD;
     this.setState({ totalValue, totalCryptoValue });
   }
 
   render() {
     return (
       <div className="balance-container">
+        My Balances:
         {this.state.balanceArr && this.state.balanceArr}
         {this.state.totalValue &&
         <div className="total-value">

@@ -14,6 +14,12 @@
   padding: .2em 0em;
 }
 
+.balance-container, .buy {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
 .login-page {
   padding-top: 20vh;
 }
@@ -27,24 +33,25 @@
   background-color: lightblue;
 }
 
-form {
+.login-form {
   font-size: 1.3em;
   color: navy;
   text-align: center;
 }
 
-form > label {
+.login-label {
   padding: 1.5em;
   display: block;
 }
 
-label > input {
+.login-input {
   margin-top: 1em;
   padding: .6em;
   width: 100%;
 }
 
 .price-container {
+  padding: 0% 20%;
   background-color: silver;
   display: flex;
   justify-content: space-between;
@@ -62,21 +69,33 @@ label > input {
 }
 
 .balance-container {
-  max-width: 300px;
+  /*max-width: 300px;*/
+  font-size: 1.3em;
 }
 
 .balance-entry {
   display: flex;
-  margin-left: 1em;
   border-left: .5em solid teal;
-  margin: 1em 1em;
+  /*margin: 1em 1em;*/
+  margin: 1em auto;
   background-color: gainsboro;
+  max-width: 400px;
 }
 
 .balance-entry > div {
-  margin-left: 1em;
+  margin: auto;
 }
 
 .balance-entry-right {
   float: right;
+}
+
+.buy {
+  border: 1px solid navy;
+  text-align: center;
+}
+
+.buy-form * {
+  font-size: 1.2em;
+  margin: .7em;
 }

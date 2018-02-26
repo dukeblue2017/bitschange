@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import PriceContainer from './PriceContainer';
 import BalanceContainer from './BalanceContainer';
+import Buy from './Buy';
 
 class MainPage extends Component {
   constructor(props) {
@@ -12,15 +13,11 @@ class MainPage extends Component {
     };
     this.fetchBalances = this.fetchBalances.bind(this);
     this.fetchPrices = this.fetchPrices.bind(this);
+    this.loadNew = this.loadNew.bind(this);
   }
 
   componentDidMount() {
     this.loadNew();
-  }
-
-  loadNew() {
-    this.fetchBalances();
-    this.fetchPrices();
   }
 
   fetchBalances() {
@@ -39,6 +36,10 @@ class MainPage extends Component {
       .catch(err => console.log('err', err));
   }
 
+  loadNew() {
+    this.fetchPrices();
+    this.fetchBalances();
+  }
 
   render() {
     return (
@@ -46,6 +47,7 @@ class MainPage extends Component {
         <div className="navbar">Bitschange</div>
         {this.state.prices && <PriceContainer prices={this.state.prices} />}
         {this.state.balances && <BalanceContainer balances={this.state.balances} prices={this.state.prices} />}
+        <Buy loadNew={this.loadNew} />
       </div>
     );
   }

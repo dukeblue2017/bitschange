@@ -52,14 +52,14 @@ class LoginPage extends Component {
     return (
       <div className="login-page">
         <div className="login-box">
-          <form onSubmit={this.handleSubmit}>
-            <label>
+          <form className="login-form" onSubmit={this.handleSubmit}>
+            <label className="login-label">
               Username:
-              <input type="text" value={this.state.username} onChange={this.handleUsernameChange} />
+              <input className="login-input" type="text" value={this.state.username} onChange={this.handleUsernameChange} />
             </label>
-            <label>
+            <label className="login-label">
               Password:
-              <input type="password" value={this.state.password} onChange={this.handlePasswordChange} />
+              <input className="login-input" type="password" value={this.state.password} onChange={this.handlePasswordChange} />
             </label>
             <input type="submit" value="Submit" />
           </form>
