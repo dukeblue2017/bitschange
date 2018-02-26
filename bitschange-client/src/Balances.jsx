@@ -40,6 +40,10 @@ class Balances extends Component {
       },
     };
     this.state.totalValue = this.state.balanceObj.USD.usdValue + this.state.balanceObj.BTC.usdValue + this.state.balanceObj.LTC.usdValue + this.state.balanceObj.DOGE.usdValue + this.state.balanceObj.XMR.usdValue;
+    for (let i = 0; i < Object.keys(this.state.balanceObj).length; i += 1) {
+      const item = Object.keys(this.state.balanceObj)[i];
+      this.state.balanceObj[item].percentageOfPortfolio = this.state.balanceObj[item].usdValue / this.state.totalValue;
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -92,6 +96,7 @@ class Balances extends Component {
             <div className="which-coin">{item}</div>
             <div className="quantity">{this.state.balanceObj[item].balance.toFixed(5)}</div>
             <div className="usd-value">${this.state.balanceObj[item].usdValue.toFixed(2)}</div>
+            <div className="percentage">{(this.state.balanceObj[item].percentageOfPortfolio * 100).toFixed(2)}%</div>
           </div>
         ))}
         {this.state.totalValue &&
