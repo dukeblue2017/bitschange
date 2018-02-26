@@ -24,7 +24,7 @@ class Buy extends Component {
         quantity,
       },
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.props.loadNew();
     })
       .catch((err) => { console.log(err); });

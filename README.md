@@ -4,7 +4,7 @@
 Cryptocurrency trading prices are from Cryptocompare: https://www.cryptocompare.com/api/
 
 ### Installation Instructions
-1. ```npm install```
+1. ```npm run setup```
 1. Create ```env.env``` file in the root directory with the following variables
     + DB_HOST
     + DB_USER

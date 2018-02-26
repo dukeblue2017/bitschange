@@ -25,17 +25,19 @@
 }
 
 .login-box {
+  color: navy;
+  text-align: center;
+  font-size: 2em;
   width: 30%;
   min-width: 200px;
   margin: auto;
-  padding: 3em;
-  border-radius: 1em;
+  padding: 1em;
+  border-radius: .3em;
   background-color: lightblue;
 }
 
 .login-form {
-  font-size: 1.3em;
-  color: navy;
+  font-size: .6em;
   text-align: center;
 }
 
@@ -70,6 +72,7 @@
 
 .balance-container {
   /*max-width: 300px;*/
+  margin-top: 1em;
   font-size: 1.3em;
 }
 

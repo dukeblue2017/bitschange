@@ -35,11 +35,13 @@ class LoginPage extends Component {
         password: this.state.password,
       },
     })
-      .then( (res) => {
+      .then((res) => {
         if (res.data.token) {
           axios.defaults.headers.common.Authorization = res.data.token;
           // alert('Correct! You have logged in');
           this.props.handleLogin();
+        } else if (res.data.code === 'ECONNREFUSED') {
+          alert('An error occurred. Please check environment variables');
         } else {
           alert('Incorrect login credentials. Please try again.');
         }
@@ -52,6 +54,7 @@ class LoginPage extends Component {
     return (
       <div className="login-page">
         <div className="login-box">
+          Bitschange
           <form className="login-form" onSubmit={this.handleSubmit}>
             <label className="login-label">
               Username:
@@ -61,7 +64,7 @@ class LoginPage extends Component {
               Password:
               <input className="login-input" type="password" value={this.state.password} onChange={this.handlePasswordChange} />
             </label>
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Log In" />
           </form>
         </div>
       </div>
