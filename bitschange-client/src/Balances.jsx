@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 class Balances extends Component {
   constructor(props) {
     super(props);
+    console.log(props)
     this.state = {
       balanceArr: null,
       totalValue: null,
@@ -15,9 +16,11 @@ class Balances extends Component {
     this.buildArr();
   }
 
-  componentWillReceiveProps() {
-    this.calculateTotalValue();
-    this.buildArr();
+  componentDidUpdate(prevProps) {
+    if (JSON.stringify(prevProps.balances) !== JSON.stringify(this.props.balances)) {
+      this.calculateTotalValue();
+      this.buildArr();
+    }
   }
 
   buildArr() {
