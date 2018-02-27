@@ -25,8 +25,14 @@ class Buy extends Component {
         quantity,
       },
     }).then((res) => {
-      // console.log(res);
-      this.props.loadNew();
+      if (res.status === 200 && res.data === 'Order was successful') {
+        alert('Order was successful.');
+        this.props.loadNew();
+      } else if (res.status === 200 && res.data === 'Insufficient funds') {
+        alert('Insufficient funds. Your order was not processed');
+      } else {
+        alert('An error occurred');
+      }
     })
       .catch((err) => { console.log(err); });
   }

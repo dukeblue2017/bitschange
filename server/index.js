@@ -131,16 +131,13 @@ app.post('/buy', (req, res) => {
             const newDenomBalance = denomBalance - denomQtNeeded;
             db.processBuy(username, coinToBuy, newCTBBalance, denominator, newDenomBalance)
               .then((dbBuyRes) => {
-                console.log('dbBuyRes:', dbBuyRes);
-                res.status(200).end();
+                res.status(200).send('Order was successful');
               })
               .catch((dbBuyErr) => {
-                console.log(dbBuyErr);
                 res.status(500).send(dbBuyErr);
               });
           } else {
-            console.log('not enough of denom', dbRes);
-            res.send('not enough of denominator');
+            res.status(200).send('Insufficient funds');
           }
         })
         .catch((DBerr) => { res.status(500).send(DBerr); });
