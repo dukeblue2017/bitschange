@@ -45,9 +45,13 @@ class Buy extends Component {
   }
 
   handleQuantityChange(event) {
+    let estimatedCost = event.target.value * this.props.prices[this.state.coinSelection].price;
+    if (Number.isNaN(estimatedCost)) {
+      estimatedCost = 0;
+    }
     this.setState({
       quantity: event.target.value,
-      estimatedCost: event.target.value * this.props.prices[this.state.coinSelection].price,
+      estimatedCost,
     });
   }
 
