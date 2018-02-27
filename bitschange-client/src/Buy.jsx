@@ -8,6 +8,7 @@ class Buy extends Component {
     this.state = {
       coinSelection: 'BTC',
       quantity: undefined,
+      estimatedCost: 0,
     };
     this.placeBuy = this.placeBuy.bind(this);
     this.handleSelection = this.handleSelection.bind(this);
@@ -31,11 +32,17 @@ class Buy extends Component {
   }
 
   handleSelection(event) {
-    this.setState({ coinSelection: event.target.value });
+    this.setState({
+      coinSelection: event.target.value,
+      estimatedCost: this.state.quantity * this.props.prices[event.target.value].price,
+    });
   }
 
   handleQuantityChange(event) {
-    this.setState({ quantity: event.target.value });
+    this.setState({
+      quantity: event.target.value,
+      estimatedCost: event.target.value * this.props.prices[this.state.coinSelection].price,
+    });
   }
 
   handleSubmit(event) {
@@ -61,6 +68,7 @@ class Buy extends Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
+          <div>Estimated Cost: ${this.state.estimatedCost} {this.props.prices && this.props.prices[this.state.coinSelection].denominator}</div>
       </div>
     );
   }

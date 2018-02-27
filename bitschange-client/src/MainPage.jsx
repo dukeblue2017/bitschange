@@ -47,7 +47,7 @@ class MainPage extends Component {
         <div className="navbar">Bitschange</div>
         {this.state.prices && <PriceContainer prices={this.state.prices} />}
         {this.state.balances && <Balances balances={this.state.balances} prices={this.state.prices} />}
-        <Buy loadNew={this.loadNew} />
+        <Buy loadNew={this.loadNew} prices={this.state.prices} />
       </div>
     );
   }
