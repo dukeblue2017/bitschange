@@ -9,19 +9,23 @@ class App extends Component {
     super(props);
     this.state = {
       isLoggedIn: false,
+      username: null,
     };
 
     this.handleLogin = this.handleLogin.bind(this);
   }
 
-  handleLogin() {
-    this.setState({ isLoggedIn: true });
+  handleLogin(username) {
+    this.setState({
+      isLoggedIn: true,
+      username,
+    });
   }
 
   render() {
     return (
       <div className="App">
-        {this.state.isLoggedIn ? <MainPage /> : <LoginPage handleLogin={this.handleLogin} />}
+        {this.state.isLoggedIn ? <MainPage username={this.state.username} /> : <LoginPage handleLogin={this.handleLogin} />}
       </div>
     );
   }

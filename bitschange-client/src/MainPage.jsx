@@ -44,7 +44,10 @@ class MainPage extends Component {
   render() {
     return (
       <div className="main-page">
-        <div className="navbar">Bitschange</div>
+        <div className="navbar">
+          Bitschange
+          <div className='username'>Welcome, {this.props.username}!</div>
+        </div>
         {this.state.prices && <PriceContainer prices={this.state.prices} />}
         {this.state.balances && <Balances balances={this.state.balances} prices={this.state.prices} />}
         <Buy loadNew={this.loadNew} prices={this.state.prices} />

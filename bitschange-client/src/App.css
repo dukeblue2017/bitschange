@@ -9,9 +9,17 @@
   color: ivory;
   font-size: 3em;
   text-align: center;
-  margin-top: auto;
-  margin-bottom: auto;
   padding: .2em 0em;
+}
+
+.username {
+  border: 1px solid ivory;
+  font-size: .3em;
+  border-radius: .3em;
+  padding: .4em .7em;
+  max-width: 200px;
+  float: right;
+  margin: 1.6em;
 }
 
 .balance-container, .buy {
@@ -98,7 +106,9 @@
 }
 
 .buy {
-  border: 1px solid navy;
+  border-width: 1px 0px;
+  border-style: solid;
+  border-color: navy;
   text-align: center;
 }
 
