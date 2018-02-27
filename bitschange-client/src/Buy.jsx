@@ -78,7 +78,7 @@ class Buy extends Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-          <div>Estimated Cost: ${this.state.estimatedCost} {this.props.prices && this.props.prices[this.state.coinSelection].denominator}</div>
+          <div>Estimated Cost: ${this.state.estimatedCost.toFixed(2)} {this.props.prices && this.props.prices[this.state.coinSelection].denominator}</div>
       </div>
     );
   }
