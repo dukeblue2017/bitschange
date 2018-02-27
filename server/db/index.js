@@ -17,7 +17,7 @@ const db = {};
 
 // db.setHash = (username, hash) => knex('users').update({ PassHash: hash }).where({ username });
 
-db.fetchHash = username => knex('users').select('PassHash').where({ username });
+db.fetchHash = username => knex('users').select(['PassHash', 'Firstname']).where({ username });
 
 db.fetchBalances = username => knex('users').select(['USD', 'BTC', 'LTC', 'DOGE', 'XMR']).where({ username });
 

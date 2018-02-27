@@ -39,10 +39,10 @@ class LoginPage extends Component {
         if (res.data.token) {
           axios.defaults.headers.common.Authorization = res.data.token;
           // alert('Correct! You have logged in');
-          this.props.handleLogin(this.state.username);
+          this.props.handleLogin(res.data.firstName);
         } else if (res.data.code === 'ECONNREFUSED') {
           alert('An error occurred. Please check environment variables');
-        } else if (res.data === 'Incorrect password'){
+        } else if (res.data === 'Incorrect password') {
           alert('Incorrect login credentials. Please try again.');
         } else {
           alert('An error occurred');

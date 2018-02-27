@@ -53,12 +53,16 @@ app.listen(port, () => {
 app.post('/login', (req, res) => {
   const reqUsername = req.body.username;
   const reqPassword = req.body.password;
+  let firstName;
   db.fetchHash(reqUsername)
-    .then(dbRes => bcrypt.compare(reqPassword, dbRes[0].PassHash))
+    .then((dbRes) => {
+      firstName = dbRes[0].Firstname;
+      return bcrypt.compare(reqPassword, dbRes[0].PassHash);
+    })
     .then((doesMatch) => {
       if (doesMatch) {
         const token = jwt.sign(reqUsername, process.env.JWT_SECRET);
-        res.json({ token });
+        res.json({ token, firstName });
       } else {
         res.send('Incorrect password');
       }
@@ -126,7 +130,6 @@ app.post('/buy', (req, res) => {
           const coinToBuyBalance = dbRes[0][coinToBuy];
           const denomBalance = dbRes[0][denominator];
           if (denomBalance >= denomQtNeeded) {
-            console.log(`Attempting to buy ${buyQuantity} ${coinToBuy}`);
             const newCTBBalance = coinToBuyBalance + buyQuantity;
             const newDenomBalance = denomBalance - denomQtNeeded;
             db.processBuy(username, coinToBuy, newCTBBalance, denominator, newDenomBalance)

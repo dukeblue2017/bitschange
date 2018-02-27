@@ -12,14 +12,12 @@
   padding: .2em 0em;
 }
 
-.username {
-  border: 1px solid ivory;
-  font-size: .3em;
-  border-radius: .3em;
+.first-name {
+  font-size: 2em;
+  border-bottom: 1px solid navy;
   padding: .4em .7em;
-  max-width: 200px;
-  float: right;
-  margin: 1.6em;
+  margin: auto;
+  text-align: center;
 }
 
 .balance-container, .buy {
