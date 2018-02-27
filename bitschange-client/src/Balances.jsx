@@ -96,6 +96,12 @@ class Balances extends Component {
     return (
       <div className="balance-container">
         My Balances:
+        <div className="balance-entry" id="balance-heading">
+          <div className="which-coin">Currency</div>
+          <div className="quantity">Quantity</div>
+          <div className="usd-value">Value in USD</div>
+          <div className="percentage" id="percentage-heading">% of Portfolio</div>
+        </div>
         {Object.keys(this.state.balanceObj).map(item => (
           <div className="balance-entry" key={item}>
             <div className="which-coin">{item}</div>
