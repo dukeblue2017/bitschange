@@ -48,9 +48,9 @@ class MainPage extends Component {
           Bitschange
         </div>
         {this.state.prices && <PriceContainer prices={this.state.prices} />}
-        <div className="first-name">Welcome, {this.props.firstName}!</div>
+        {this.props.firstName && <div className="first-name">Welcome, {this.props.firstName}!</div>}
         {this.state.balances && <Balances balances={this.state.balances} prices={this.state.prices} />}
-        <Buy loadNew={this.loadNew} prices={this.state.prices} />
+        {this.state.prices && <Buy loadNew={this.loadNew} prices={this.state.prices} />}
       </div>
     );
   }

@@ -44,8 +44,10 @@ class LoginPage extends Component {
           alert('An error occurred. Please check environment variables');
         } else if (res.data === 'Incorrect password') {
           alert('Incorrect login credentials. Please try again.');
-        } else {
-          alert('An error occurred');
+        }
+        else {
+          alert('An error occurred. Please check database connection')
+          console.log(res)
         }
       })
       .catch(err => console.log(err));
