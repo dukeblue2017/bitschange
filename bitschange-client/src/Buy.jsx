@@ -30,11 +30,16 @@ class Buy extends Component {
         this.props.loadNew();
       } else if (res.status === 200 && res.data === 'Insufficient funds') {
         alert('Insufficient funds. Your order was not processed');
+      } else if (res.data === 'Negative quantitities not allowed') {
+        console.log('here')
       } else {
         alert('An error occurred');
       }
     })
-      .catch((err) => { console.log(err); });
+      .catch((err) => {
+        console.log(err);
+        alert('Bad request.')
+      });
   }
 
   handleSelection(event) {

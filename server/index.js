@@ -120,30 +120,34 @@ app.post('/buy', (req, res) => {
   const denominator = currentPrices[coinToBuy].denominator;
   const denomQtNeeded = buyQuantity * price;
   const token = req.headers.authorization;
-  jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
-    if (err) {
-      res.send(err);
-    } else {
-      const username = decode;
-      db.fetchTwoBalances(username, coinToBuy, denominator)
-        .then((dbRes) => {
-          const coinToBuyBalance = dbRes[0][coinToBuy];
-          const denomBalance = dbRes[0][denominator];
-          if (denomBalance >= denomQtNeeded) {
-            const newCTBBalance = coinToBuyBalance + buyQuantity;
-            const newDenomBalance = denomBalance - denomQtNeeded;
-            db.processBuy(username, coinToBuy, newCTBBalance, denominator, newDenomBalance)
-              .then((dbBuyRes) => {
-                res.status(200).send('Order was successful');
-              })
-              .catch((dbBuyErr) => {
-                res.status(500).send(dbBuyErr);
-              });
-          } else {
-            res.status(200).send('Insufficient funds');
-          }
-        })
-        .catch((DBerr) => { res.status(500).send(DBerr); });
-    }
-  });
+  if ((req.body.quantity * 1) > 0) {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
+      if (err) {
+        res.send(err);
+      } else {
+        const username = decode;
+        db.fetchTwoBalances(username, coinToBuy, denominator)
+          .then((dbRes) => {
+            const coinToBuyBalance = dbRes[0][coinToBuy];
+            const denomBalance = dbRes[0][denominator];
+            if (denomBalance >= denomQtNeeded) {
+              const newCTBBalance = coinToBuyBalance + buyQuantity;
+              const newDenomBalance = denomBalance - denomQtNeeded;
+              db.processBuy(username, coinToBuy, newCTBBalance, denominator, newDenomBalance)
+                .then((dbBuyRes) => {
+                  res.status(200).send('Order was successful');
+                })
+                .catch((dbBuyErr) => {
+                  res.status(500).send(dbBuyErr);
+                });
+            } else {
+              res.status(200).send('Insufficient funds');
+            }
+          })
+          .catch((DBerr) => { res.status(500).send(DBerr); });
+      }
+    });
+  } else {
+    res.status(400).send('Negative quantities not allowed');
+  }
 });
